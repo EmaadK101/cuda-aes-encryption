@@ -2,8 +2,6 @@
 
 A from-scratch AES-128 implementation, benchmarked on CPU vs. a custom CUDA kernel, to see how far GPU parallelism can push a workload that's normally thought of as sequential.
 
-Originally built for ECEN 489 (GPU Programming & Visualization) at Texas A&M — a small, selective practicum capped at ~20 students.
-
 ## Why AES is a good fit for a GPU
 
 AES-128 in **CTR mode** encrypts each 16-byte block independently — there's no dependency between blocks, unlike CBC mode. That independence is what makes it safely parallelizable: each GPU thread can encrypt its own block with zero risk of a race condition or cross-thread interference. That property, more than raw thread count, is the actual reason this workload maps well onto a GPU.
